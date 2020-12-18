@@ -1,7 +1,7 @@
 package com.berlin.library.api;
 
 
-import com.berlin.library.api.model.UserModel;
+import com.berlin.demo.api.model.UserModel;
 
 /**
  * @author <a href="mailto:chenxilzx1@gmail.com">theonefx</a>
