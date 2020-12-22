@@ -1,9 +1,9 @@
-package com.berlin.library.service;
+package com.berlin.library.service.book;
 
 import com.berlin.library.api.constants.ResultDTO;
 import com.berlin.library.api.enums.HttpCode;
 import com.berlin.library.api.model.book.BookClassDTO;
-import com.berlin.library.api.service.BookClassService;
+import com.berlin.library.api.service.book.BookClassService;
 import com.berlin.library.dao.mapper.book.BookClassMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -56,6 +56,4 @@ public class BookDTO extends BaseDTO implements Serializable {
      */
     private Date publishDate;
 
-
-
 }
