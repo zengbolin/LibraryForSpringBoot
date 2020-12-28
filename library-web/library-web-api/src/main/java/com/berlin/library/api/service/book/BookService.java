@@ -19,9 +19,16 @@ public interface BookService {
     /**
      * 根据id查找书籍
      * @param id id
-     * @return 查找的数据集
+     * @return 查找的数据结果集
      */
     ResultDTO findById(int id);
+
+    /**
+     * 根据id查找书籍
+     * @param id id
+     * @return 查找的数据集
+     */
+    BookDTO findByIdReturnBookDTO(int id);
 
     /**
      *新增书籍

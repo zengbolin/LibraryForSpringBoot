@@ -3,8 +3,8 @@ package com.berlin.library.api.model.book;
 import com.berlin.library.api.model.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
 import java.io.Serializable;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -35,6 +35,16 @@ public class BookDTO extends BaseDTO implements Serializable {
      * 书籍价格
      */
     private BigDecimal bookPrice;
+
+    /**
+     * 借书一天的价格
+     */
+    private BigDecimal bookBorrowPrice;
+
+    /**
+     * 书籍数量
+     */
+    private Integer bookCount;
 
     /**
      * 书籍出版社名称

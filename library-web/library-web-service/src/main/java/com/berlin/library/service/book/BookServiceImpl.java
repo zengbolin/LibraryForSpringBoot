@@ -83,6 +83,19 @@ public class BookServiceImpl implements BookService {
         return new ResultDTO(HttpCode.SUCCESS.getCode(), "查找成功", bookDTO);
     }
 
+    @Override
+    public BookDTO findByIdReturnBookDTO(int id) {
+        logger.info("入参： " + id);
+
+        // 使用mapper进行获取数据
+        BookDTO bookDTO = mapper.findById(id);
+
+        logger.info("出参： " + bookDTO);
+
+        // 成功
+        return bookDTO;
+    }
+
     /**
      * 新增书籍
      *
@@ -98,6 +111,9 @@ public class BookServiceImpl implements BookService {
         }
         if (bookDTO.getBookClassId() <= 0 || bookDTO.getBookClassId() == null) {
             return new ResultDTO(HttpCode.FAIL.getCode(), "书籍编号不能为空或者书籍编号不合法");
+        }
+        if (0 == bookDTO.getBookCount()){
+            return new ResultDTO(HttpCode.FAIL.getCode(), "书籍数量不能小于0");
         }
 
         // 使用mapper进行插入

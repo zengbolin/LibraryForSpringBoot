@@ -29,14 +29,14 @@ public interface BookMapper {
 
     /**
      *新增书籍
-     * @param bookClassDTO 书籍实体类信息(不包含id)
+     * @param bookDTO 书籍实体类信息(不包含id)
      * @return 影响行数
      */
     int insertBookDTO(BookDTO bookDTO);
 
     /**
      * 更新书籍
-     * @param bookClassDTO 书籍实体类信息(包含id)
+     * @param bookDTO 书籍实体类信息(包含id)
      * @return 影响的行数
      */
     int updateBookDTO(BookDTO bookDTO);
