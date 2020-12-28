@@ -1,10 +1,10 @@
-package com.berlin.library.service;
+package com.berlin.library.service.book;
 
 import com.berlin.library.api.constants.ResultDTO;
 import com.berlin.library.api.enums.HttpCode;
-import com.berlin.library.api.model.book.BookClassDTO;
-import com.berlin.library.api.service.BookClassService;
-import com.berlin.library.dao.mapper.book.BookClassMapper;
+import com.berlin.library.api.model.book.BookDTO;
+import com.berlin.library.api.service.book.BookService;
+import com.berlin.library.dao.mapper.book.BookMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +15,22 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 /**
- * 书籍分类Service实现类
  * @author ZengBerlin
- * @date 2020/12/18 16:19
+ * @date 2020/12/20 14:38
  * @Email: 15102019493@163.com
  */
 @Service
-public class BookClassServiceImpl implements BookClassService {
+public class BookServiceImpl implements BookService {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private BookClassMapper mapper;
+    private BookMapper mapper;
 
     /**
-     * 根据名称模糊查找所有的书籍分类信息
+     * 根据名称模糊查找所有的书籍信息
      *
-     * @param name 分类名称
+     * @param name 名称
      * @return 匹配的所有数据集
      */
     @Override
@@ -43,21 +42,21 @@ public class BookClassServiceImpl implements BookClassService {
         }
 
         // 用mapper进行获取数据
-        List<BookClassDTO> bookClassDTOList = mapper.findListByName(name);
+        List<BookDTO> bookDTOList = mapper.findListByName(name);
 
-        logger.info("出参: " + bookClassDTOList);
+        logger.info("出参: " + bookDTOList);
 
         // 判断是否为空
-        if (CollectionUtils.isEmpty(bookClassDTOList)) {
-            return new ResultDTO(HttpCode.FAIL.getCode(), "暂无对应分类数据");
+        if (CollectionUtils.isEmpty(bookDTOList)) {
+            return new ResultDTO(HttpCode.FAIL.getCode(), "暂无对应书籍数据");
         }
 
         // 成功
-        return new ResultDTO(HttpCode.SUCCESS.getCode(), "查找成功", bookClassDTOList);
+        return new ResultDTO(HttpCode.SUCCESS.getCode(), "查找成功", bookDTOList);
     }
 
     /**
-     * 根据id查找书籍分类
+     * 根据id查找书籍
      *
      * @param id id
      * @return 查找的数据集
@@ -71,35 +70,54 @@ public class BookClassServiceImpl implements BookClassService {
         }
 
         // 使用mapper进行获取数据
-        BookClassDTO bookClassDTO = mapper.findById(id);
+        BookDTO bookDTO = mapper.findById(id);
 
-        logger.info("出参： " + bookClassDTO);
+        logger.info("出参： " + bookDTO);
 
         // 判断是否为空
-        if (null == bookClassDTO) {
-            return new ResultDTO(HttpCode.FAIL.getCode(), "暂无分类数据");
+        if (null == bookDTO) {
+            return new ResultDTO(HttpCode.FAIL.getCode(), "暂无书籍数据");
         }
 
         // 成功
-        return new ResultDTO(HttpCode.SUCCESS.getCode(), "查找成功", bookClassDTO);
+        return new ResultDTO(HttpCode.SUCCESS.getCode(), "查找成功", bookDTO);
+    }
+
+    @Override
+    public BookDTO findByIdReturnBookDTO(int id) {
+        logger.info("入参： " + id);
+
+        // 使用mapper进行获取数据
+        BookDTO bookDTO = mapper.findById(id);
+
+        logger.info("出参： " + bookDTO);
+
+        // 成功
+        return bookDTO;
     }
 
     /**
-     * 新增书籍分类
+     * 新增书籍
      *
-     * @param bookClassDTO 书籍实体类信息(不包含id)
+     * @param bookDTO 书籍实体类信息(不包含id)
      * @return 影响行数
      */
     @Override
-    public ResultDTO insertBookClassDTO(BookClassDTO bookClassDTO) {
-        logger.info("入参: " + bookClassDTO);
+    public ResultDTO insertBookDTO(BookDTO bookDTO) {
+        logger.info("入参: " + bookDTO);
         // 校验数据合法性
-        if (!StringUtils.hasText(bookClassDTO.getName())) {
-            return new ResultDTO(HttpCode.FAIL.getCode(), "分类名称不能为空");
+        if (!StringUtils.hasText(bookDTO.getBookName())) {
+            return new ResultDTO(HttpCode.FAIL.getCode(), "书籍名称不能为空");
+        }
+        if (bookDTO.getBookClassId() <= 0 || bookDTO.getBookClassId() == null) {
+            return new ResultDTO(HttpCode.FAIL.getCode(), "书籍编号不能为空或者书籍编号不合法");
+        }
+        if (0 == bookDTO.getBookCount()){
+            return new ResultDTO(HttpCode.FAIL.getCode(), "书籍数量不能小于0");
         }
 
         // 使用mapper进行插入
-        int flag = mapper.insertBookClassDTO(bookClassDTO);
+        int flag = mapper.insertBookDTO(bookDTO);
 
         // 判断flag
         if (flag <= 0) {
@@ -112,21 +130,21 @@ public class BookClassServiceImpl implements BookClassService {
     }
 
     /**
-     * 更新书籍分类
+     * 更新书籍
      *
-     * @param bookClassDTO 书籍实体类信息(包含id)
+     * @param bookDTO 书籍实体类信息(包含id)
      * @return 影响的行数
      */
     @Override
-    public ResultDTO updateBookClassDTO(BookClassDTO bookClassDTO) {
-        logger.info("入参: " + bookClassDTO);
+    public ResultDTO updateBookDTO(BookDTO bookDTO) {
+        logger.info("入参: " + bookDTO);
         // 校验数据合法性
-        if (!StringUtils.hasText(bookClassDTO.getId().toString())) {
+        if (!StringUtils.hasText(bookDTO.getId().toString())) {
             return new ResultDTO(HttpCode.FAIL.getCode(), "数据ID不能为空");
         }
 
         // 使用mapper进行更新
-        int flag = mapper.updateBookClassDTO(bookClassDTO);
+        int flag = mapper.updateBookDTO(bookDTO);
 
         // 判断flag
         if (flag <= 0) {
@@ -139,13 +157,13 @@ public class BookClassServiceImpl implements BookClassService {
     }
 
     /**
-     * 删除书籍分类
+     * 删除书籍
      *
      * @param id 书籍分类id
      * @return 影响的行数
      */
     @Override
-    public ResultDTO deleteBookClassDTO(int id) {
+    public ResultDTO deleteBookDTO(int id) {
         logger.info("入参: " + id);
         // 校验数据合法性
         if (0 == id) {
@@ -153,7 +171,7 @@ public class BookClassServiceImpl implements BookClassService {
         }
 
         // 使用mapper进行删除
-        int flag = mapper.deleteBookClassDTO(id);
+        int flag = mapper.deleteBookDTO(id);
 
         // 判断flag
         if (flag <= 0) {
@@ -164,4 +182,5 @@ public class BookClassServiceImpl implements BookClassService {
         // 成功
         return new ResultDTO(HttpCode.SUCCESS.getCode(), "删除数据成功");
     }
+
 }

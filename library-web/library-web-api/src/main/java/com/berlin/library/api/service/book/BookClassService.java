@@ -1,4 +1,4 @@
-package com.berlin.library.api.service;
+package com.berlin.library.api.service.book;
 
 import com.berlin.library.api.constants.ResultDTO;
 import com.berlin.library.api.model.book.BookClassDTO;
