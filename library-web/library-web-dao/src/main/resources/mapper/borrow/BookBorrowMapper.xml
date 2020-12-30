@@ -31,5 +31,35 @@
         insert into book_borrow(user_id,user_name,book_id,book_name,count,start_date,end_date,price,trade_fee,create_date,valid_flag)
         values (#{userId},#{userName},#{bookId},#{bookName},#{count},#{startDate},#{endDate},#{price},#{tradeFee},#{creatDate},#{validFlag})
     </insert>
+    
+    <select id="findById" parameterType="integer" resultMap="BookBorrowDTO">
+        select
+        <include refid="base_column_list" />
+        FROM book_borrow
+        WHERE id = #{id}
+        and valid_flag = 'ENABLE'
+    </select>
+
+    <update id="updateBorrow">
+        update book_borrow
+        <set>
+            <if test='count != null and count >= 0 '>
+                count = #{count},
+            </if>
+            <if test="tmp1 != null">
+                tmp1 = #{tmp1},
+            </if>
+            <if test="tmp2 != null">
+                tmp2 = #{tmp2},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="validFlag != null">
+                valid_flag = #{validFlag}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
 </mapper>
