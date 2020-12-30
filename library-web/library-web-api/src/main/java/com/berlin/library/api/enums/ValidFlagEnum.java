@@ -1,6 +1,8 @@
 package com.berlin.library.api.enums;
 
 /**
+ * 数据有效性标识
+ *
  * @author ZengBerlin
  * @date 2020/12/17 17:27
  * @Email: 15102019493@163.com

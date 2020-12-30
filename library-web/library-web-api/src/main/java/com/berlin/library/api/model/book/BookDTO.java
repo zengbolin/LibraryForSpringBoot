@@ -3,6 +3,7 @@ package com.berlin.library.api.model.book;
 import com.berlin.library.api.model.BaseDTO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
 import java.io.Serializable;
 
 import java.math.BigDecimal;

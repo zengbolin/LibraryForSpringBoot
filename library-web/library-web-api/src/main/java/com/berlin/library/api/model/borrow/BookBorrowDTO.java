@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- *借书实体类
+ * 借书实体类
  *
  * @author ZengBerlin
  * @date 2020/12/23 10:04
