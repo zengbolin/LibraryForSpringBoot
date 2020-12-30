@@ -16,6 +16,7 @@ import java.util.List;
 
 /**
  * 书籍分类Service实现类
+ *
  * @author ZengBerlin
  * @date 2020/12/18 16:19
  * @Email: 15102019493@163.com
@@ -23,8 +24,14 @@ import java.util.List;
 @Service
 public class BookClassServiceImpl implements BookClassService {
 
+    /**
+     * 日志实体类
+     */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 图书分类mapper
+     */
     @Autowired
     private BookClassMapper mapper;
 

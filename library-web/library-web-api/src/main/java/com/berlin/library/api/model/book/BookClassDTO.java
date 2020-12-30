@@ -8,6 +8,7 @@ import java.io.Serializable;
 
 /**
  * 书籍分类实体类
+ *
  * @author ZengBerlin
  * @date 2020/12/17 17:24
  * @Email: 15102019493@163.com

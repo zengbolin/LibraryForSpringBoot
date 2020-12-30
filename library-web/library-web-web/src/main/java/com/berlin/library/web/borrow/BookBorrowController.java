@@ -43,7 +43,7 @@ public class BookBorrowController {
             int userId = bookBorrowDTO.getUserId();
             String userName = bookBorrowDTO.getUserName();
 
-            return service.doBookBorrow(bookName,bookId,startDate,endDate,borrowCount,userId,userName);
+            return service.doBookBorrow(bookName, bookId, startDate, endDate, borrowCount, userId, userName);
         } catch (Exception e) {
             logger.error("系统异常: " + e);
             return new ResultDTO(HttpCode.EXCEPTION.getCode(), "系统异常");

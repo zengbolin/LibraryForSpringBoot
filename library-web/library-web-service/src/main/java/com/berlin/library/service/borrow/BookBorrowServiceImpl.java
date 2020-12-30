@@ -24,13 +24,21 @@ import java.util.Date;
 @Service
 public class BookBorrowServiceImpl implements BookBorrowService {
 
+    /**
+     * 图书借书信息mapper
+     */
     @Autowired
     private BookBorrowMapper mapper;
 
+    /**
+     * 图书信息mapper
+     */
     @Autowired
     private BookMapper bookMapper;
 
-    // 设置最大借阅时长
+    /**
+     * 设置最长借阅时间
+     */
     final long lengthOfDay = 60;
 
 

@@ -15,6 +15,8 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 /**
+ * 书籍信息接口实现类
+ *
  * @author ZengBerlin
  * @date 2020/12/20 14:38
  * @Email: 15102019493@163.com
@@ -22,8 +24,14 @@ import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
 
+    /**
+     * 日志记录实体类
+     */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 书籍信息mapper
+     */
     @Autowired
     private BookMapper mapper;
 
@@ -112,7 +120,7 @@ public class BookServiceImpl implements BookService {
         if (bookDTO.getBookClassId() <= 0 || bookDTO.getBookClassId() == null) {
             return new ResultDTO(HttpCode.FAIL.getCode(), "书籍编号不能为空或者书籍编号不合法");
         }
-        if (0 == bookDTO.getBookCount()){
+        if (0 == bookDTO.getBookCount()) {
             return new ResultDTO(HttpCode.FAIL.getCode(), "书籍数量不能小于0");
         }
 

@@ -19,8 +19,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/book")
 public class BookController {
 
+    /**
+     * 日志记录实体类
+     */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * book的service
+     */
     @Autowired
     private BookService service;
 

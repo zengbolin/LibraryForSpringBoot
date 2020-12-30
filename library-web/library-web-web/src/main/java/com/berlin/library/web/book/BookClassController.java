@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * 书籍分类访问层
+ *
  * @author ZengBerlin
  * @date 2020/12/18 17:07
  * @Email: 15102019493@163.com
@@ -19,8 +20,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/bookClass")
 public class BookClassController {
 
+    /**
+     * 日志实体类
+     */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 图书分类service
+     */
     @Autowired
     private BookClassService service;
 
@@ -31,13 +38,13 @@ public class BookClassController {
      * @return 匹配的所有数据集
      */
     @GetMapping("/findListByName/name={name}")
-    public ResultDTO findListByName(@PathVariable String name){
+    public ResultDTO findListByName(@PathVariable String name) {
         try {
             // 调用service层
             return service.findListByName(name);
         } catch (Exception e) {
             logger.error("系统异常: " + e);
-            return new ResultDTO(HttpCode.EXCEPTION.getCode(),"系统异常");
+            return new ResultDTO(HttpCode.EXCEPTION.getCode(), "系统异常");
         }
     }
 
@@ -48,13 +55,13 @@ public class BookClassController {
      * @return 查找的数据集
      */
     @GetMapping("/findById/id={id}")
-    public ResultDTO findById(@PathVariable int id){
+    public ResultDTO findById(@PathVariable int id) {
         try {
             // 调用service层
             return service.findById(id);
         } catch (Exception e) {
             logger.error("系统异常: " + e);
-            return new ResultDTO(HttpCode.EXCEPTION.getCode(),"系统异常");
+            return new ResultDTO(HttpCode.EXCEPTION.getCode(), "系统异常");
         }
     }
 
@@ -65,13 +72,13 @@ public class BookClassController {
      * @return 影响行数
      */
     @PostMapping("/insertBookClass")
-    public ResultDTO insertBookClassDTO(@RequestBody BookClassDTO bookClassDTO){
+    public ResultDTO insertBookClassDTO(@RequestBody BookClassDTO bookClassDTO) {
         try {
             // 调用service层
             return service.insertBookClassDTO(bookClassDTO);
         } catch (Exception e) {
             logger.error("系统异常: " + e);
-            return new ResultDTO(HttpCode.EXCEPTION.getCode(),"系统异常");
+            return new ResultDTO(HttpCode.EXCEPTION.getCode(), "系统异常");
         }
     }
 
@@ -82,13 +89,13 @@ public class BookClassController {
      * @return 影响的行数
      */
     @PostMapping("/updateBookClass")
-    public ResultDTO updateBookClassDTO(@RequestBody BookClassDTO bookClassDTO){
+    public ResultDTO updateBookClassDTO(@RequestBody BookClassDTO bookClassDTO) {
         try {
             // 调用service层
             return service.updateBookClassDTO(bookClassDTO);
         } catch (Exception e) {
             logger.error("系统异常: " + e);
-            return new ResultDTO(HttpCode.EXCEPTION.getCode(),"系统异常");
+            return new ResultDTO(HttpCode.EXCEPTION.getCode(), "系统异常");
         }
     }
 
@@ -99,13 +106,13 @@ public class BookClassController {
      * @return 影响的行数
      */
     @GetMapping("/deleteBookClass/id={id}")
-    public ResultDTO deleteBookDTO(@PathVariable int id){
+    public ResultDTO deleteBookDTO(@PathVariable int id) {
         try {
             // 调用service层
             return service.deleteBookClassDTO(id);
         } catch (Exception e) {
             logger.error("系统异常: " + e);
-            return new ResultDTO(HttpCode.EXCEPTION.getCode(),"系统异常");
+            return new ResultDTO(HttpCode.EXCEPTION.getCode(), "系统异常");
         }
     }
 }
