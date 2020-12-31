@@ -25,23 +25,35 @@ import java.util.Date;
 public class BookBorrowServiceImpl implements BookBorrowService {
 
     /**
-     * 图书借书信息mapper
+     * 注入借书信息mapper
      */
     @Autowired
     private BookBorrowMapper mapper;
 
     /**
-     * 图书信息mapper
+     * 注入书信息mapper
      */
     @Autowired
     private BookMapper bookMapper;
 
     /**
-     * 设置最长借阅时间
+     * 设置最大借阅时长
      */
     final long lengthOfDay = 60;
 
 
+    /**
+     * 借书方法
+     *
+     * @param bookName    书名
+     * @param bookId      书id
+     * @param startDate   借书开始时间
+     * @param endDate     借书结束时间
+     * @param borrowCount 借书数量
+     * @param userId      用户借书id
+     * @param userName    用户名
+     * @return 结果集
+     */
     @Override
     public ResultDTO doBookBorrow(String bookName, int bookId, Date startDate, Date endDate, int borrowCount, int userId, String userName) {
         // 判断借书编号合法性
@@ -85,6 +97,19 @@ public class BookBorrowServiceImpl implements BookBorrowService {
         return new ResultDTO(HttpCode.SUCCESS.getCode(), "借书成功。");
     }
 
+    /**
+     * 使用获取到的信息来实现借书实际方法方法
+     *
+     * @param bookName    书名
+     * @param bookId      书id
+     * @param startDate   借书开始时间
+     * @param endDate     借书结束时间
+     * @param borrowCount 借书数量
+     * @param userId      用户借书id
+     * @param userName    用户名
+     * @param bookDTO     书籍信息实体类
+     * @return 结果集
+     */
     private int doInsertBookBorrowRecord(int bookId, String bookName, int borrowCount, Date startDate,
                                          Date endDate, int userId, String userName, BookDTO bookDTO) {
         // Step3: 真正借书操作

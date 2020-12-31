@@ -13,14 +13,16 @@ import java.util.Date;
  */
 public interface BookBorrowService {
     /**
-     * @param bookName    书籍名字
-     * @param bookId      书籍信息id
+     * 借书接口实现
+     *
+     * @param bookName    书名
+     * @param bookId      书id
      * @param startDate   借书开始时间
      * @param endDate     借书结束时间
      * @param borrowCount 借书数量
-     * @param userId      用户id
+     * @param userId      用户借书id
      * @param userName    用户名
-     * @return 结果集
+     * @return 结果集对象
      */
     ResultDTO doBookBorrow(String bookName, int bookId, Date startDate, Date endDate, int borrowCount, int userId, String userName);
 }
