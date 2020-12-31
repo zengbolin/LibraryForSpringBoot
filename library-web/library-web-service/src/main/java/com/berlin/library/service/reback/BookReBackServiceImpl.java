@@ -8,7 +8,6 @@ import com.berlin.library.api.model.borrow.BookBorrowDTO;
 import com.berlin.library.api.service.reback.BookReBackService;
 import com.berlin.library.dao.mapper.book.BookMapper;
 import com.berlin.library.dao.mapper.borrow.BookBorrowMapper;
-import com.berlin.library.dao.mapper.reback.BookReBackMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -98,30 +97,33 @@ public class BookReBackServiceImpl implements BookReBackService {
         if (reBackCount > flagCount) {
             return new ResultDTO(HttpCode.FAIL.getCode(), "归还数量大于借阅数量，请确保归还数量正确！");
         } else if (reBackCount == flagCount) {
-            // 借书还书数量一样，直接将记录标为disable，book数量增加
-            // step1: 操作还书信息表
-            // count为借书书籍数量，tmp1为还书数量,tmp2为还书时间
-            localBookBorrowDTO.setTmp1(String.valueOf(reBackCount + tmp1Count));
-            localBookBorrowDTO.setTmp2(String.valueOf(new Date()));
             localBookBorrowDTO.setValidFlag(ValidFlagEnum.DISABLE);
-            bookBorrowMapper.updateBorrow(localBookBorrowDTO);
-            // step2: 追加book信息表剩余数量
-            bookDTO.setBookCount(bookDTO.getBookCount() + reBackCount);
-            bookDTO.setUpdateDate(new Date());
-            bookMapper.updateBookDTO(bookDTO);
+            updateBookAndBookBorrow(localBookBorrowDTO, bookDTO, reBackCount, tmp1Count);
         } else {
-            // 还书数量低于借书数量，将借书数量-还书数量->更新book表以及book_borrow表
-            // step1: 操作还书信息表
-            // count为借书书籍数量，tmp1为还书数量,tmp2为还书时间
-            localBookBorrowDTO.setTmp1(String.valueOf(reBackCount + tmp1Count));
-            localBookBorrowDTO.setTmp2(String.valueOf(new Date()));
-            bookBorrowMapper.updateBorrow(localBookBorrowDTO);
-            // step2: 追加book信息表剩余数量
-            bookDTO.setBookCount(bookDTO.getBookCount() + reBackCount);
-            bookDTO.setUpdateDate(new Date());
-            bookMapper.updateBookDTO(bookDTO);
+            updateBookAndBookBorrow(localBookBorrowDTO, bookDTO, reBackCount, tmp1Count);
         }
         return new ResultDTO(HttpCode.SUCCESS.getCode(), "归还成功！" + ((reBackCount == flagCount) ?
                 "已经没有要归还的书籍" : "还剩余" + (flagCount - reBackCount) + "本书要还！"));
+    }
+
+    /**
+     * 更新book表和借书表
+     *
+     * @param localBookBorrowDTO 本地借书记录
+     * @param bookDTO            书籍记录
+     * @param reBackCount        还书数量
+     * @param tmp1Count          已经还书数量
+     */
+    private void updateBookAndBookBorrow(BookBorrowDTO localBookBorrowDTO, BookDTO bookDTO, int reBackCount, int tmp1Count) {
+        // 还书数量低于借书数量，将借书数量-还书数量->更新book表以及book_borrow表
+        // step1: 操作还书信息表
+        // count为借书书籍数量，tmp1为还书数量,tmp2为还书时间
+        localBookBorrowDTO.setTmp1(String.valueOf(reBackCount + tmp1Count));
+        localBookBorrowDTO.setTmp2(String.valueOf(new Date()));
+        bookBorrowMapper.updateBorrow(localBookBorrowDTO);
+        // step2: 追加book信息表剩余数量
+        bookDTO.setBookCount(bookDTO.getBookCount() + reBackCount);
+        bookDTO.setUpdateDate(new Date());
+        bookMapper.updateBookDTO(bookDTO);
     }
 }

@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
- * 图书分类接口
+ * 图书分类mapper
  *
  * @author ZengBerlin
  * @date 2020/12/18 10:57

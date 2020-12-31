@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.*;
 public class BookClassController {
 
     /**
-     * 日志实体类
+     * 日志记录实体类
      */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     /**
-     * 图书分类service
+     * 图书分类实体类
      */
     @Autowired
     private BookClassService service;

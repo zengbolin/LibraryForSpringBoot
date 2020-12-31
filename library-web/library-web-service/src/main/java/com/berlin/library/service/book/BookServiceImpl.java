@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
 import java.util.List;
 
 /**
- * 书籍信息接口实现类
+ * 图书信息实体类
  *
  * @author ZengBerlin
  * @date 2020/12/20 14:38
@@ -29,9 +29,6 @@ public class BookServiceImpl implements BookService {
      */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    /**
-     * 书籍信息mapper
-     */
     @Autowired
     private BookMapper mapper;
 

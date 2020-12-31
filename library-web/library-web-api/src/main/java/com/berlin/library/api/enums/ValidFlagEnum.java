@@ -1,7 +1,7 @@
 package com.berlin.library.api.enums;
 
 /**
- * Flag数据有效性标识
+ * 数据有效性标识
  *
  * @author ZengBerlin
  * @date 2020/12/17 17:27

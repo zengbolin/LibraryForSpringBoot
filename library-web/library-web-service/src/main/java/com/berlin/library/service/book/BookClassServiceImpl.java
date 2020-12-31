@@ -23,9 +23,8 @@ import java.util.List;
  */
 @Service
 public class BookClassServiceImpl implements BookClassService {
-
     /**
-     * 日志实体类
+     * 日志记录实体类
      */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
