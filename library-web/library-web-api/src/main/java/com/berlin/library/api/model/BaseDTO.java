@@ -7,6 +7,7 @@ import java.util.Date;
 
 /**
  * 实体类父类
+ *
  * @author ZengBerlin
  * @date 2020/12/17 17:21
  * @Email: 15102019493@163.com

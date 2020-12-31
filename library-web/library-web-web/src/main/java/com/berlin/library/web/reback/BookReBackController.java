@@ -28,11 +28,20 @@ public class BookReBackController {
      */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 还书实体类
+     */
     @Autowired
     private BookReBackService bookReBackService;
 
+    /**
+     * 还书操作
+     *
+     * @param bookBorrowDTO 借书实体类
+     * @return 结果集
+     */
     @PostMapping("/doReBack")
-    public ResultDTO bookReBack(@RequestBody BookBorrowDTO bookBorrowDTO){
+    public ResultDTO bookReBack(@RequestBody BookBorrowDTO bookBorrowDTO) {
         try {
             return bookReBackService.updateBorrowInfo(bookBorrowDTO);
         } catch (Exception e) {

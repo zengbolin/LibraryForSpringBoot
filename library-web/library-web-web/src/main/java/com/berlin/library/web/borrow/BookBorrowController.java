@@ -22,8 +22,14 @@ import java.util.Date;
 @RequestMapping("/borrow")
 public class BookBorrowController {
 
+    /**
+     * 日志记录实体类
+     */
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    /**
+     * 借书接口类
+     */
     @Autowired
     private BookBorrowService service;
 
